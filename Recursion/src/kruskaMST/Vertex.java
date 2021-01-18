@@ -1,4 +1,4 @@
-package MST;
+package kruskaMST;
 
 import java.util.ArrayList;
 

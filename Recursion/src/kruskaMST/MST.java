@@ -1,4 +1,4 @@
-package MST;
+package kruskaMST;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,11 +16,11 @@ public class MST {
 		List<Edge> sortedEdges = sortEdge(initEdge());
 		List<Vertex> vertexs = initVertex();
 		
-		MST(vertexs, sortedEdges);
+		kruskaMST(vertexs, sortedEdges);
 		
 	}
 	
-	public static void MST(List<Vertex> vertexs, List<Edge> edges) {
+	public static void kruskaMST(List<Vertex> vertexs, List<Edge> edges) {
 		int cnt = 0;
 		for(int i=0;i<edges.size();i++) {
 			Edge e = edges.get(i);

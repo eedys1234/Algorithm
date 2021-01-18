@@ -1,4 +1,4 @@
-package MST;
+package kruskaMST;
 
 public class Edge {
 	
