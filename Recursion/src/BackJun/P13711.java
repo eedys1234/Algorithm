@@ -17,7 +17,8 @@ public class P13711 {
 			
 			int[] x = new int[t+1];
 			int[] y = new int[t+1];
-			int[][] result = new int[t+1][t+1];
+			int[] lis_x = new int[t+1];
+			int[] lis_y = new int[t+1];
 						
 			line = inbr.readLine();
 			String[] temp = line.split(" ");
@@ -29,28 +30,83 @@ public class P13711 {
 			line = inbr.readLine();
 			temp = line.split(" ");
 
+			/*
 			for(int i=0;i<temp.length;i++) {
 				y[i+1] = Integer.valueOf(temp[i]);
 			}
+			*/
 			
-			for(int i=1;i<x.length;i++) 
-			{
-				for(int j=1;j<y.length;j++)
-				{
-					if(x[i]==y[j])
-					{
-						result[i][j] = result[i-1][j-1] + 1;						
-					}
-					else 
-					{
-						result[i][j] = Math.max(result[i-1][j], result[i][j-1]);
-					}
+			for(int i=1;i<x.length;i++) {
+				y[x[i]] = Integer.valueOf(temp[i-1]);
+			}
+			
+			lis_x[1] = x[1];
+			lis_y[1] = y[1];
+			int i = 1;
+			int j = 1;
+			int k = 1;
+
+			while(i<y.length) {
+				
+				/*
+				if(lis_x[j] < x[i]) {
+					lis_x[j+1] = x[i];
+					j++;
+				}
+				else {
+					int idx = binarySearch(lis_x, 1, j, x[i]);
+					lis_x[idx] = x[i];
+				}
+				
+				if(lis_y[k] < y[i]) {
+					lis_y[k+1] = y[i];
+					k++;
+				}
+				else {
+					int idx = binarySearch(lis_y, 1, k, y[i]);
+					lis_y[idx] = x[i];
+				}
+				*/
+				
+				if(lis_y[k] < y[i]) {
+					lis_y[k+1] = y[i];
+					k++;
+				}
+				else {
+					int idx = binarySearch(lis_y, 1, k, y[i]);
+					lis_y[idx] = x[i];
+				}
+
+				i++;
+			}
+						
+			for(int l=1;l<lis_y.length;l++) {
+				if(lis_y[l] != 0) {
+					System.out.print(lis_y[l]+" ");					
 				}
 			}
 			
-			System.out.print(result[t][t]);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static int binarySearch(int[] lis, int left, int right, int target) {
+
+		int mid;
+		
+		while(left < right) {
+			
+			mid = (left + right)/2;
+			
+			if(lis[mid] < target) {
+				left = mid+1;
+			}
+			else {
+				right = mid;
+			}
+		}
+		
+		return right;
 	}
 }
