@@ -14,7 +14,6 @@ public class P1931 {
 
 			int n = Integer.valueOf(line);
 			int[][] value = new int[n][3];
-			int max = 0;
 			int result = 0;
 
 			for(int i=0;i<n;i++) {
@@ -27,31 +26,34 @@ public class P1931 {
 
 			}			
 						
-			quickSort(value, 0, value.length-1, 1, 0);
+			mergeSort(value, 0, value.length-1, 1);
 
-			int diff = value[0][2];
+			int diff = value[0][1];
 			int offset = 0;
 			int length = 0;
 
 			for(int i=1;i<value.length;i++) 
 			{
-				if(diff == value[i][2]) {
+				if(diff == value[i][1]) {
 					length++;
 				}
 				else {
-					quickSort(value, offset, offset + length, 2, 0);	
+					mergeSort(value, offset, offset + length, 0);	
 					offset = i;
-					diff = value[i][2];
+					diff = value[i][1];
 					length = 0;
 				}
 			}
 			
+			if(length > 0) {
+				mergeSort(value, offset, offset + length, 0);					
+			}
 			int t = 0;
 			for(int i=0;i<value.length;i++) {
 				int start = value[i][0];
 				int end = value[i][1];
 				
-				if(start>=t) {
+				if(start >= t) {
 					t = end;
 					result++;
 				}				
@@ -66,53 +68,58 @@ public class P1931 {
 	}
 	
 	
-	public static void quickSort(int[][] value, int left, int right, int col, int order) {
-		
+	public static void mergeSort(int[][] value, int left, int right, int col) {
 		
 		if(left < right) {
-
-			int pivot = partition(value, left, right, col, order);
-			quickSort(value, left, pivot-1, col, order);
-			quickSort(value, pivot+1, right, col, order);
 			
+			int mid = (left + right)/2;
+			mergeSort(value, left, mid, col);
+			mergeSort(value, mid+1, right, col);
+			merge(value, left, mid, right, col);
 		}
-		
 	}
 	
-	public static int partition(int[][] value, int left, int right, int col, int order) {
+	public static void merge(int[][] value, int left, int mid, int right, int col) {
 		
-		int i = left-1;
+		int i = left;
+		int j = mid+1;
+		int k = 0;
+		int m = left;
 		
-		int r = value[right][col];
+		int[][] temp = new int[right-left+1][3];
 		
-		for(int j=left;j<=right;j++) {
-
-			if(order == 0)
-			{
-				if(value[j][col] < r) {
-					i++;
-					swap(value, i, j);
-				}				
+		while(i<=mid && j<=right) {
+			
+			if(value[i][col] < value[j][col]) {
+				temp[k][0] = value[i][0];
+				temp[k][1] = value[i][1];
+				temp[k++][2] = value[i++][2];
 			}
 			else {
-				if(value[j][col] > r) {
-					i++;
-					swap(value, i, j);
-				}
+				temp[k][0] = value[j][0];
+				temp[k][1] = value[j][1];
+				temp[k++][2] = value[j++][2];				
 			}
 		}
 		
-		swap(value, i+1, right);
-		right = i+1;
-		return right;
+		while(i<=mid) {
+			temp[k][0] = value[i][0];
+			temp[k][1] = value[i][1];
+			temp[k++][2] = value[i++][2];			
+		}
+
+		while(j<=right) {
+			temp[k][0] = value[j][0];
+			temp[k][1] = value[j][1];
+			temp[k++][2] = value[j++][2];			
+		}
+		
+		for(int l=0;l<temp.length;l++) {
+			value[m][0] = temp[l][0];
+			value[m][1] = temp[l][1];
+			value[m++][2] = temp[l][2];
+		}
+
 	}
 	
-	public static void swap(int[][] value, int i, int j) {
-		
-		for(int x=0;x<value[0].length;x++) {
-			int temp = value[i][x];
-			value[i][x] = value[j][x];
-			value[j][x] = temp;			
-		}
-	}
 }
