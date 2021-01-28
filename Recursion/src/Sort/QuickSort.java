@@ -4,7 +4,7 @@ public class QuickSort {
 
 	public static void main(String[] args) {
 
-		int[] data = {9, 8, 7, 6, 5, 4, 3, 2, 1};
+		int[] data = {9, 8, 7, 6, 5, 4, 3, 2, 3};
 		
 		quick_sort(data, 0, data.length - 1);
 		
