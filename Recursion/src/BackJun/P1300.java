@@ -10,15 +10,15 @@ public class P1300 {
 		BufferedReader inbr = new BufferedReader(new InputStreamReader(System.in));
 		
 		try {
-			int start = 1;
-			int end = 0;
-			int mid = 0;
-			int result = 0;
+			long start = 1;
+			long end = 0;
+			long mid = 0;
+			long result = 0;
 			
-			int n = Integer.valueOf(inbr.readLine());
-			int k = Integer.valueOf(inbr.readLine());
+			long n = Long.valueOf(inbr.readLine());
+			long k = Long.valueOf(inbr.readLine());
 		
-			end = n*n;
+			end = k;
 			
 			while(start <= end) {
 			
@@ -37,7 +37,7 @@ public class P1300 {
 				result = 0;
 			}
 			
-			System.out.println(mid);
+			System.out.println(start);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
