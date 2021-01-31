@@ -3,7 +3,7 @@ package BackJun;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class P12015 {
+public class P14003 {
 
 	public static void main(String[] args) {
 		
@@ -14,7 +14,12 @@ public class P12015 {
 			int n = Integer.valueOf(inbr.readLine());
 			int[] sequence = new int[n+1];
 			int[] lis = new int[n+1];
+			String[] path = new String[n+1];
+			StringBuilder sb = new StringBuilder();
+			
 			int count = 0;
+			int max = 0;
+			int l=0;
 			String[] temp = inbr.readLine().split(" ");
 			
 			for(int i=0;i<temp.length;i++) {
@@ -24,6 +29,7 @@ public class P12015 {
 			int j = 0;
 			if(n>=1) {
 				lis[1] = sequence[1];
+				path[1] = sequence[1] + " "; 
 				j = 1;				
 			}
 			
@@ -32,16 +38,34 @@ public class P12015 {
 				if(lis[j] < sequence[i]) {
 					j+=1;
 					lis[j] = sequence[i];
+					
+					sb.append(path[j]);
+					sb.append(sequence[i]);
+					sb.append(" ");
 				}
 				else {
 					int idx = binarySearch(lis, 1, j, sequence[i]);
 					lis[idx] = sequence[i];
+					
+					for(int k=1;k<=idx;k++) {
+						sb.append(path[i]);
+						sb.append(lis[k]);
+						sb.append(" ");
+					}
 				}
+				path[i] = sb.toString();
+				sb.delete(0, sb.length());
+				
+				if(max < path[i].split(" ").length) {
+					l = i;
+				}
+
 			}
 			
 			count = j;
-			
 			System.out.println(count);
+			System.out.println(path[l].substring(0, path[l].length()-1));
+
 
 		} catch(Exception e) {
 			e.printStackTrace();

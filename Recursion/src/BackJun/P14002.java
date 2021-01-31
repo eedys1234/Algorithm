@@ -3,7 +3,7 @@ package BackJun;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class P12015 {
+public class P14002 {
 
 	public static void main(String[] args) {
 		
@@ -14,35 +14,43 @@ public class P12015 {
 			int n = Integer.valueOf(inbr.readLine());
 			int[] sequence = new int[n+1];
 			int[] lis = new int[n+1];
-			int count = 0;
+			String[] path = new String[n+1];
+			
 			String[] temp = inbr.readLine().split(" ");
 			
 			for(int i=0;i<temp.length;i++) {
 				sequence[i+1] = Integer.valueOf(temp[i]);
 			}
 			
-			int j = 0;
-			if(n>=1) {
-				lis[1] = sequence[1];
-				j = 1;				
-			}
-			
-			for(int i=2;i<sequence.length;i++) {
+			for(int i=1;i<sequence.length;i++) 
+			{
+				lis[i] = 1;
+				path[i] = String.valueOf(sequence[i]) + " ";
 				
-				if(lis[j] < sequence[i]) {
-					j+=1;
-					lis[j] = sequence[i];
-				}
-				else {
-					int idx = binarySearch(lis, 1, j, sequence[i]);
-					lis[idx] = sequence[i];
+				for(int j=1;j<=i;j++) 
+				{
+					if(sequence[i] > sequence[j]) {
+						if(lis[i] < lis[j]+1) {
+							lis[i] = lis[j]+1;
+							path[i] = path[j] + sequence[i] + " ";
+						}
+					}
 				}
 			}
 			
-			count = j;
-			
-			System.out.println(count);
+			int max = 0;
+			int k = 0;
+			for(int i=1;i<lis.length;i++) {
+				if(max < lis[i]) {
+					max = lis[i];
+					k = i;
+				}
+			}
 
+			System.out.println(lis[k]);
+			
+			System.out.println(path[k].substring(0, path[k].length()-1));
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
