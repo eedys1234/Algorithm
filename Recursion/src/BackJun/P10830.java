@@ -15,7 +15,7 @@ public class P10830 {
 			int n = Integer.valueOf(temp[0]);
 			long m = Long.valueOf(temp[1]);
 			
-			int[][] matrix = new int[n+1][n+1];
+			long[][] matrix = new long[n+1][n+1];
 			
 			for(int i=1;i<=n;i++) 
 			{
@@ -26,13 +26,13 @@ public class P10830 {
 				}
 			}
 			
-			int[][] C = multipleMatrix(matrix, m);
+			long[][] C = multipleMatrix(matrix, m);
 			
 			for(int i=1;i<C.length;i++)
 			{
 				for(int j=1;j<C[0].length;j++)
 				{
-					System.out.print(C[i][j]+" ");
+					System.out.print((C[i][j])%1000+" ");
 				}
 				System.out.println();
 			}
@@ -42,21 +42,23 @@ public class P10830 {
 		}
 	}
 	
-	public static int[][] multipleMatrix(int[][] A, long m) {
+	public static long[][] multipleMatrix(long[][] A, long m) {
 		if(m == 1) {
 			return A;
 		}
 		else if(m%2 == 1) {
-			return solve(A, multipleMatrix(A, m-1));
+			long[][] half = multipleMatrix(A, (m-1)/2);
+			return solve(A, solve(half, half));
 		}
 		else {
-			return solve(multipleMatrix(A, m/2), multipleMatrix(A, m/2));
+			long[][] half = multipleMatrix(A, m/2);
+			return solve(half, half);
 		}
 	}
 	
-	public static int[][] solve(int[][] A, int[][] B) {
+	public static long[][] solve(long[][] A, long[][] B) {
 		
-		int[][] C = new int[A.length][A[0].length];
+		long[][] C = new long[A.length][A[0].length];
 		
 		for(int i=1;i<A.length;i++)
 		{
@@ -64,7 +66,7 @@ public class P10830 {
 			{
 				for(int k=1;k<B.length;k++) 
 				{
-					C[i][j] += A[i][k] * B[k][j];
+					C[i][j] = C[i][j] + (A[i][k]%1000 * B[k][j]%1000)%1000;
 					C[i][j] %= 1000;
 				}
 			}
