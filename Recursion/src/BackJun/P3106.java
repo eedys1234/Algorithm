@@ -57,25 +57,7 @@ public class P3106 {
 			nextOrder[0] = -1;
 			nextOrder[1] = 0;
 			nextOrder[2] = 1;
-			
-			/*
-			if(place > 0) {
-				nextOrder[0] = 1;
-				nextOrder[1] = 0;
-				nextOrder[2] = -1;
-			}
-			else if(place < 0){
-				nextOrder[0] = -1;
-				nextOrder[1] = 0;
-				nextOrder[2] = 1;
-			}
-			else {
-				nextOrder[0] = 0;
-				nextOrder[1] = -1;
-				nextOrder[2] = 1;
-			}
-			*/
-			
+						
 			for(int i=0;i<nextOrder.length;i++) {
 				
 				int curY = y + nextOrder[i];
