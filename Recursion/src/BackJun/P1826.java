@@ -35,6 +35,7 @@ public class P1826 {
 				pairs.add(new Pair(a, b));
 			}
 			
+			//일직선 상을 걸으며 주유소를 찾기 때문에 주유소 위치에 따라 오름차순정렬
 			Collections.sort(pairs, new Comparator<Pair>() {
 
 				@Override
@@ -48,19 +49,23 @@ public class P1826 {
 			int use = Integer.valueOf(temp[1]);
 			int idx = 0;
 			
+			//거리가 1~목적지까지
 			for(int i=1;i<=destination;i++) {
 
+				//연료를 다 사용했으면 이전 주유소에서 기름이 가장많은 주유소를 꺼낸다.
 				if(use == 0) {
 					if(!pq.isEmpty()) {
 						use += pq.poll();
 						res++;						
 					}
+					//없을경우 -1
 					else {
 						System.out.println("-1");
 						return;
 					}
 				}
 
+				//각 거리에 따른 주유소 추가
 				while(idx >= 0 && idx < pairs.size() && pairs.get(idx).a <=i) {
 					pq.offer(pairs.get(idx++).b);
 				}
