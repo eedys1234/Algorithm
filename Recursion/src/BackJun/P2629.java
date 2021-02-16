@@ -37,7 +37,6 @@ public class P2629 {
 				marble[i+1] = Integer.valueOf(temp[i]); 
 			 }
 						 
-			 int[][] result = new int[n+1][sum+1];
 
 			
 			 
