@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
+//투포인터 문제
 public class P2470 {
 
 	public static void main(String[] args) {
