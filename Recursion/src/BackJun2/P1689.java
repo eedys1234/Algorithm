@@ -16,6 +16,8 @@ public class P1689 {
 		try {
 			
 			int n = Integer.valueOf(inbr.readLine());
+			int cnt = 0;
+			int res = 0;
 			List<Pair> pairs = new ArrayList<>();
 			
 			for(int i=0;i<n;i++) 
@@ -37,10 +39,7 @@ public class P1689 {
 					}
 				}
 			});
-			
-			int cnt = 0;
-			int res = 0;
-			
+						
 			for(int i=0;i<pairs.size();i++) {
 				Pair pair = pairs.get(i);
 				if(pair.t == 1) {
