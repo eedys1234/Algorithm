@@ -3,6 +3,7 @@ package BackJun2;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+//투 포인터 응용문제
 public class P6137 {
 
 	public static void main(String[] args) {
@@ -41,7 +42,6 @@ public class P6137 {
 					int j = 1;
 										
 					while(left+i < s.length && right-j >= 0) {
-//					while(left+i <= right-j) {
 						if(s[left+i] < s[right-j]) {
 							k++;
 							sb.append(s[left++]);
