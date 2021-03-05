@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+//½ºÀ§ÇÎ
 public class P2170 {
 
 	public static void main(String[] args) {
