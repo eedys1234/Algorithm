@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.util.Deque;
 import java.util.LinkedList;
 
+//슬라이딩 윈도우
 public class P2531 {
 	
 	public static void main(String[] args) {
