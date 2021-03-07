@@ -36,17 +36,13 @@ public class P2836 {
 				}
 			}
 			
-			Collections.sort(leftDistances, new Comparator<Distance>() {
-
-				@Override
-				public int compare(Distance o1, Distance o2) {
-					if(Integer.compare(o1.start, o2.start) == 0) {
-						return Integer.compare(o1.end, o2.end);
-					}
-					else {
-						return Integer.compare(o1.start, o2.start);						
-					}
+			Collections.sort(leftDistances, (Distance o1, Distance o2)->{
+				if(Integer.compare(o1.start, o2.start) == 0) {
+				return Integer.compare(o1.end, o2.end);
 				}
+				else {
+					return Integer.compare(o1.start, o2.start);						
+				}				
 			});
 			
 			start = leftDistances.get(0).start;
