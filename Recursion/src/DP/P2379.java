@@ -16,6 +16,8 @@ public class P2379 {
 								
 				String A = inbr.readLine();
 				String B = inbr.readLine();
+				
+				
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
