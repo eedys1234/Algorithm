@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Map.Entry;
 
+//2021 KAKAO BLIND RECRUITMENT - 블라인드 순위검색
+//실제 SQL 구문을 데이터 캐시에 저장할 때 SQL 구문의 길이가 제각각이기 때문에 해싱함수를 적용하여 고정된 길이로 만들어주며 이 문제도 동일한 방법으로 풀이
 public class P0315_1 {
 	
 	//쿼리에 대한 조합을 저장할 Map 선언
