@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 
 public class P0315_1 {
 	
+	//쿼리에 대한 조합을 저장할 Map 선언
 	public static Map<String, List<Integer>> store;
 	
 	public static void main(String[] args) {
@@ -43,25 +44,31 @@ public class P0315_1 {
 		
 		int[] answer = new int[query.length];
 		store = new HashMap<>();
-			
+		
 		for(int i=0;i<info.length;i++) {
 			String[] temp = info[i].split(" ");
 			boolean[] include = new boolean[temp.length];
+			//재귀함수를 통해 Info에 대한 부분집합을 구함
 			powerSet(temp, include, 0);					
 		}
 		
+		//각 정보에 대한 부분집합에 해당되는 점수를 오름차순으로 정렬
 		for(Entry<String, List<Integer>> entry : store.entrySet()) {
 			Collections.sort(store.get(entry.getKey()));
 		}
 		
 		for(int i=0;i<query.length;i++) {
 			
+			//조회 조건 convert
 			int idx = query[i].lastIndexOf(" ");
 			int score = Integer.valueOf(query[i].substring(idx+1));
 			String inString = query[i].substring(0, idx).replace("and", "").replace(" ", "").replace("-", "");
 			
+			//조회 조건(점수 제외)에 맞는 점수 리스트 가져옴
 			List<Integer> scores = store.get(inString);
 			
+			//1) lower bound를 이용해 특정 점수 이상에 해당하는 개수를 구함
+			//전체개수 - 1)에서 구했던 개수를 통해 조건에 해당하는 개수를 구함
 			if(!Objects.isNull(scores)) {
 				int index = lowerBound(scores, 0, scores.size(), score);
 				answer[i] = scores.size() - index;
