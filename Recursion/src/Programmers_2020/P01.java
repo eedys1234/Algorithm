@@ -61,7 +61,6 @@ public class P01 {
     		sb = new StringBuilder();
         }
         
-//		System.out.println(compress);
         answer = compress.length();
         return answer;
     }
