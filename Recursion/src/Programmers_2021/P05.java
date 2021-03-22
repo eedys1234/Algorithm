@@ -1,4 +1,4 @@
-package Programmers;
+package Programmers_2021;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 
 //스위핑 문제?
 //시작점을 기준으로 
-public class P0319 {
+public class P05 {
 	
 	public static void main(String[] args) {
 		

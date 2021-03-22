@@ -1,4 +1,4 @@
-package Programmers;
+package Programmers_2021;
 
 public class P06 {
 

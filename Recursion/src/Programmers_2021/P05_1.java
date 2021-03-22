@@ -1,6 +1,6 @@
-package Programmers;
+package Programmers_2021;
 
-public class P0319_1 {
+public class P05_1 {
 
 	public static void main(String[] args) {
 		

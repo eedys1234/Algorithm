@@ -1,4 +1,4 @@
-package Programmers;
+package Programmers_2021;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +11,7 @@ import java.util.Map.Entry;
 
 //조합을 이용한 브루트포스
 //조합은 백트래킹으로 구현
-public class P0317 {
+public class P03 {
 	
 	public static HashMap<Integer, Integer> maxLengthStore;
 	public static Map<Integer, HashMap<String, Integer>> store;

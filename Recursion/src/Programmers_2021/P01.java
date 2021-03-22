@@ -1,11 +1,11 @@
-package Programmers;
+package Programmers_2021;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class P0315 {
+public class P01 {
 	
 	public static void main(String[] args) {
 		

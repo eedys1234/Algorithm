@@ -1,8 +1,8 @@
-package Programmers;
+package Programmers_2021;
 
 //2021 KAKAO BLIND RECRUITMENT - 블라인드 신규아이디
 //구현문제
-public class P0316 {
+public class P02 {
 	
 	public static void main(String[] args) {
 		
