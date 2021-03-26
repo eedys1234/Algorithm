@@ -37,14 +37,6 @@ public class P03 {
 		{
 			key = rotate90Key(key);
 			
-//			for(int i=0;i<key.length;i++) {
-//				for(int j=0;j<key[0].length;j++) {
-//					System.out.print(key[i][j]+ " ");
-//				}
-//				System.out.println();
-//			}
-//			System.out.println();
-			
 			for(int i=0;i<extendLock.length - key.length;i++)
 			{
 				for(int j=0;j<extendLock[0].length - key[0].length;j++)
