@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 
+//다익스트라가 사용될줄 몰랐음
 public class P06 {
 
 	public static boolean[] visited;
@@ -44,6 +45,8 @@ public class P06 {
     		cards_number.add(new ArrayList<>());
     	}
     	
+    	//쌍으로 찾아야 하기 때문에 각 카드의 위치를 저장
+    	//저장하지 않으면 매번 board를 탐색해야하는 오버헤드가 발생
     	for(int i=0;i<board.length;i++) 
     	{
     		for(int j=0;j<board[0].length;j++) 
@@ -65,11 +68,12 @@ public class P06 {
     		cards[i] = i;
     	}
     	
+    	//어떤 순서로 카드를 짝 맞출기 결정
+    	//모든 경우의 수 다 조사(조합)
     	combination(cards, max, 1);
     	
     	for(int i=0;i<comb.size();i++) 
     	{
-    		System.out.println(comb.get(i));
     		String[] path = comb.get(i).split(",");
     		answer = Math.min(answer, brute(board, cards_number, path, 0, r, c));
     	}    	
@@ -77,6 +81,7 @@ public class P06 {
         return answer;
     }
     
+    //백트래킹
     public static int brute(int[][] board, List<List<Location>> cards_number, String[] path, int k, int r, int c) {
     	
     	if(k == path.length) {
@@ -88,6 +93,8 @@ public class P06 {
 		Location first = cards_number.get(num-1).get(0);
 		Location second = cards_number.get(num-1).get(1);
 		
+		//다익스트라 알고리즘을 사용하여 1이라고 적힌 첫번째 카드에서 1이라고 적힌 2번째 카드로 이동거리 구함
+		//쌍으로 존재하기 때문에 첫번째 카드를 먼저 찾을지, 두번째 카드를 먼저 찾을지 둘다 구해야함
 		int cal1 = dijkstra(board, r, c, first.y, first.x) 
 				+ dijkstra(board, first.y, first.x, second.y, second.x) 
 				+ 2;
@@ -96,24 +103,29 @@ public class P06 {
 				+ dijkstra(board, second.y, second.x, first.y, first.x) 
 				+ 2;
 		
+		//찾았던 카드는 제거
 		board[first.y][first.x] = 0;
 		board[second.y][second.x] = 0;
-			
+		
+		//첫번째를 마지막으로 찾은경우와 두번째를 마지막으로 찾은경우를 출발점으로 다음 순서의 카드 짝을 구함
 		ans = Math.min(ans, Math.min(cal1 + brute(board, cards_number, path, k+1, second.y, second.x), 
 				cal2 + brute(board, cards_number, path, k+1, first.y, first.x)));
 		
+		//다른 순서도 구해야하기 때문에 원상복귀
 		board[first.y][first.x] = num;
 		board[second.y][second.x] = num;
 		
     	return ans;
     }
     
+    //ctrl + 연산에 의해 다익스트라 알고리즘 사용해야함
     public static int dijkstra(int[][] board, int y, int x, int endY, int endX) {
     	
     	PriorityQueue<Location> pq = new PriorityQueue<>();
     	int[][] dist = new int[4][4];
     	int distance = 0;
     	
+    	//출발지에서 각 2차원 도착지의 거리 초기화
     	for(int i=0;i<dist.length;i++)
     	{
     		for(int j=0;j<dist[0].length;j++)
@@ -122,6 +134,7 @@ public class P06 {
     		}
     	}
     	
+    	//출발지 거리 초기화
     	dist[y][x] = 0;
     	pq.offer(new Location(x, y, 0));
     	
@@ -133,7 +146,6 @@ public class P06 {
     		pq.poll();
     		
     		if(nx == endX && ny == endY) {
-
     			return distance;
     		}
     		
@@ -143,12 +155,15 @@ public class P06 {
     			int cx = nx;
     			int cy = ny;
     			
+    			//해당 방향으로 계속 갈수 있다면 
     			while(range(cy+dy[i], cx+dx[i])) {
     				
+    				//방향키로만 이동했을 경우
     				cnt++;
     				cx += dx[i];
     				cy += dy[i];
     				
+    				//이동 경로에 카드가 있다면 빠져나옴
     				if(board[cy][cx] != 0) break;
     				
     				if(dist[cy][cx] > distance + cnt) {
@@ -157,14 +172,14 @@ public class P06 {
     				}
     			}
     			
+    			//방향키로만 이동했던 경로보다 ctrl로 이동한 경로가 짧을 경우 추가
     			if(dist[cy][cx] > distance+1) {
     				dist[cy][cx] = distance+1;
 					pq.offer(new Location(cx, cy, dist[cy][cx]));
     			}
     		}
     	}
-    	
-    	
+    	    	
     	return 0;
     }
     
