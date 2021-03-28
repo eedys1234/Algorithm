@@ -5,25 +5,27 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class P11437 {
-	
+public class P11438 {
+
 	public static int[] depth;
 	public static int[][] dp;
-	public static int maxLevel; 
+	public static int maxLevel;
 	public static List<List<Integer>> adj;
-
+	
 	public static void main(String[] args) throws Exception {
 		
 		BufferedReader inbr = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
-		adj = new ArrayList<>();
 		
 		int n = Integer.valueOf(inbr.readLine());
-		depth = new int[100001];
-		dp = new int[100001][20];
-		maxLevel = (int) Math.floor(baseLog(n, 2));
+		depth = new int[n+1];
+		dp = new int[n+1][20];
 		
-		for(int i=0;i<n;i++) {
+		maxLevel = (int)Math.floor(log2(n));
+		adj = new ArrayList<>();
+		
+		for(int i=0;i<n;i++) 
+		{
 			adj.add(new ArrayList<>());
 		}
 		
@@ -32,6 +34,7 @@ public class P11437 {
 			String[] temp = inbr.readLine().split(" ");
 			int parent = Integer.valueOf(temp[0]);
 			int child = Integer.valueOf(temp[1]);
+			
 			adj.get(parent-1).add(child);
 			adj.get(child-1).add(parent);
 		}
@@ -49,7 +52,8 @@ public class P11437 {
 			int b = Integer.valueOf(temp[1]);
 			
 			if(depth[a] != depth[b]) {
-
+				
+				//a를 상위로 고정시킴
 				if(depth[a] > depth[b]) {
 					
 					int t = a;
@@ -57,7 +61,8 @@ public class P11437 {
 					b = t;
 				}
 				
-				for(int j=maxLevel;j>=0;j--) 
+				//b를 a보다 높은 depth로 이동시킴
+				for(int j=maxLevel;j>=0;j--)
 				{
 					if(depth[a] <= depth[dp[b][j]]) {
 						b = dp[b][j];
@@ -66,42 +71,42 @@ public class P11437 {
 			}
 			
 			int lca = a;
-			
+
 			if(a != b) {
 				
-				for(int j=maxLevel;j>=0;j--) 
+				for(int j=maxLevel;j>=0;j--)
 				{
 					if(dp[a][j] != dp[b][j]) {
 						a = dp[a][j];
-						b = dp[b][j];						
+						b = dp[b][j];
 					}
 					
 					lca = dp[a][j];
 				}
 			}
-			
 			sb.append(lca).append("\n");
 		}
 		
-		System.out.println(sb.toString());
-	}	
+		System.out.println(sb.toString());		
+	}
 	
-	public static double baseLog(double x, double base) {
-		return Math.log(x)/Math.log(base);
+	public static double log2(double x) {
+		return Math.log(x)/Math.log(2);
 	}
 	
 	public static void getTree(int here, int parent) {
-		
+				
 		depth[here] = depth[parent] + 1;
 		dp[here][0] = parent;
 		
-		for(int i=1;i<=maxLevel;i++) {			
+		for(int i=1;i<=maxLevel;i++) 
+		{
 			int tmp = dp[here][i-1];
 			dp[here][i] = dp[tmp][i-1];
 		}
 		
 		int len = adj.get(here-1).size();
-		
+
 		for(int i=0;i<len;i++) 
 		{
 			int next = adj.get(here-1).get(i);
