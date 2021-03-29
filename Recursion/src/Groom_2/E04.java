@@ -12,7 +12,9 @@ public class E04 {
 		StringBuilder sb = new StringBuilder();
 		int n = Integer.valueOf(inbr.readLine());
 		String[] indexes = new String[n];
-		
+		//1000
+		//100
+		//kmp?
 		for(int i=0;i<n;i++) 
 		{
 			indexes[i] = inbr.readLine();

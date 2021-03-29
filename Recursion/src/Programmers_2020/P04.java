@@ -25,6 +25,9 @@ public class P04 {
 		}
 	}
 	
+	//찾고자하는 쿼리 별 길이 당 Trie를 구함
+	//trie를 이용하여 검색
+	//?가 접두사에 있을경우 쿼리와 words를 역순으로 저장하여 구함
 	public static int[] solution(String[] words, String[] queries) {
 		
 		int[] answer = new int[queries.length];
@@ -103,7 +106,6 @@ public class P04 {
 			
 			for(int i=0;i<word.length();i++)
 			{
-//				thisNode = thisNode.getChildNodes().computeIfAbsent(word.charAt(i), c -> new TrieNode());
 				thisNode = thisNode.getChildNodes().merge(word.charAt(i), new TrieNode(), (oldTrieNode, newTrieNode)-> oldTrieNode.addSubTreeSize());
 			}
 			
