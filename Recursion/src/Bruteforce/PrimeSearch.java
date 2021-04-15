@@ -17,7 +17,7 @@ public class PrimeSearch {
 	public static void main(String[] args) throws Exception {
 		
 		String numbers = "17";
-		
+	
 		int result = solution(numbers);
 		System.out.println(result);
 	}

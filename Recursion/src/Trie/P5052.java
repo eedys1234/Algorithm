@@ -83,7 +83,7 @@ public class P5052 {
 			
 			return thisNode.isLastChar();
 		}
-		
+			
 		public int size(String word) {
 			
 			TrieNode thisNode = this.rootNode;

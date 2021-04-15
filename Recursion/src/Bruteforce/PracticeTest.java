@@ -3,6 +3,7 @@ package Bruteforce;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,7 +45,7 @@ public class PracticeTest {
         		}
         	}
         }
-        
+
         List<Integer> answerList = new LinkedList<Integer>(store.keySet());
         
         Collections.sort(answerList, (Integer i1, Integer i2) -> { 
